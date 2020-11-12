@@ -1,0 +1,33 @@
+html { 
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(4, 95, 27);
+    margin: 0;
+    padding: 0;
+}
+
+.form-inline {
+    text-align: center;
+}
+
+.listCountry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 2;
+}
+
+.form_country {
+    display: flex;
+    justify-content: center;
+}
+
+.flag {
+    width: 500px;
+    height: 500px;
+}
