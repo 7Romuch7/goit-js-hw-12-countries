@@ -1,4 +1,4 @@
-import fetchCountries from "../scriptes/fetchCountries.js";
+import NewFetchCountries from '../scriptes/fetchCountries.js'
 import countries from '../template/countries.hbs';
 import list from '../template/listCountry.hbs';
 
@@ -7,9 +7,11 @@ import "@pnotify/core/dist/BrightTheme.css";
 import { error } from '@pnotify/core';
 const debounce = require('lodash.debounce');
 
+const newFetchCountries = new NewFetchCountries();
+
 const refs = {
-        containerForm: document.querySelector('.js-search-form'),
-        listCountry: document.querySelector('.js-articles'),
+    containerForm: document.querySelector('.js-search-form'),
+    listCountry: document.querySelector('.js-articles'),
 }
 
 refs.containerForm.addEventListener('input', debounce(onSearchCountry, 500));
@@ -19,19 +21,19 @@ function onSearchCountry(event) {
     clierListCountry();
     const searchCountry = event.target.value;
 
-    fetchCountries.fetchCountries(searchCountry).then(data => {
+    newFetchCountries.fetchCountries(searchCountry).then(data => {
         if (data.length > 10) {
             error({
                 text: "Too many matches found. Please enter a more specific query!"
             });
-        } else if (data.length <= 10) {
-            listCountryMarkup(data, list);
         } else if (data.length === 1) {
             listCountryMarkup(data, countries);
+        } else if (data.length <= 10) {
+            listCountryMarkup(data, list);
         } else if (data.status === 404) {
             error({
           text: "No country has been found. Please enter a more specific query!"
-        });
+            });
         }
     })
         .catch(err => {
